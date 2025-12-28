@@ -2,7 +2,8 @@
   "name": "救世主的日常生活",
   "short_name": "FGO日常",
   "description": "FGO同人游戏 - 立香的迦勒底生活",
-  "start_url": "./index.html",
+  "start_url": "/fgo-daily/",
+  "scope": "/fgo-daily/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#e91e63",
@@ -15,5 +16,4 @@
       "purpose": "any maskable"
     }
   ]
-
 }
