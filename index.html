@@ -2966,7 +2966,7 @@
         
         // 加入字数要求
         fullPrompt += `\n\n【输出要求】
-- 字数：1500-5000字
+- 字数：1500-10000字
 - 直接输出故事正文，不要有任何前言、解释或思考过程
 - 保持第二人称视角，"你"永远指代藤丸立香（女性）`;
         
@@ -2974,7 +2974,7 @@
     }
 
     // ==================== API调用函数（应用预设） ====================
-    async function callAPI(systemPrompt, messages = [], maxTokens = 4000, isR18 = false) {
+    async function callAPI(systemPrompt, messages = [], maxTokens = 10000, isR18 = false) {
         const api = GS.api;
         if (!api.key) throw new Error('未设置API Key');
 
@@ -3034,7 +3034,7 @@
         return text;
     }
 
-    async function callAPIStream(systemPrompt, onUpdate, maxTokens = 4000, isR18 = false) {
+    async function callAPIStream(systemPrompt, onUpdate, maxTokens = 10000, isR18 = false) {
         const api = GS.api;
         if (!api.key) throw new Error('未设置API Key');
 
@@ -3389,7 +3389,7 @@ async function callChatAPI(charPrompt, messages = []) {
 - ${randomChar.prompt}
 - 遭遇方式：${eventDesc}
 
-请创作1500-3000字的段子：
+请创作1500-10000字的段子：
 1. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 2. ${randomChar.name}用第三人称或名字称呼
 3. 描写偶遇的过程、两人的互动、一起前往目的地的路上发生的事
@@ -3415,9 +3415,9 @@ async function callChatAPI(charPrompt, messages = []) {
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 4000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 4000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
 
             GS.currentEventStory = story;
@@ -3529,7 +3529,7 @@ async function callChatAPI(charPrompt, messages = []) {
 - 老师：${teacher.name}（${teacher.prompt}）
 ${classmate ? `- 同学：${classmate.name}（${classmate.prompt}）` : ''}
 
-请创作1500-3000字的段子：
+请创作1500-10000字的段子：
 1. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 2. 描写上课的情景、老师的教学风格
 3. ${classmate ? `穿插与${classmate.name}的互动` : '与老师的互动'}
@@ -3554,9 +3554,9 @@ ${classmate ? `- 同学：${classmate.name}（${classmate.prompt}）` : ''}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 4000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 4000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
 
             GS.currentEventStory = story;
@@ -3644,7 +3644,7 @@ ${classmate ? `- 同学：${classmate.name}（${classmate.prompt}）` : ''}
 ${sceneDesc}
 
 【创作要求】
-1. 字数：1500-4000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. ${randomChar.name}用第三人称或名字称呼，禁止称为"你"
 4. 结合时间、天气、地点特色进行描写
@@ -3670,9 +3670,9 @@ ${sceneDesc}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 5000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 5000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
             
             GS.currentEventStory = story;
@@ -3914,7 +3914,7 @@ ${lastSentences}
 【要求】
 由于${effect.itemName}的效果，必然发生亲密事情...
 
-1. 字数：1500-4000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"指代${GS.playerName}（女性）
 3. 直白粗俗的R18描写
 4. 详细的感官描写
@@ -3937,9 +3937,9 @@ ${lastSentences}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 5000, true);
+                }, 10000, true);
             } else {
-                story = await callAPI(prompt, [], 5000, true);
+                story = await callAPI(prompt, [], 10000, true);
             }
 
             GS.currentEventStory = story;
@@ -4416,7 +4416,7 @@ const response = await callChatAPI(prompt, chatContext);
 - 住所：${char.home.description || loc?.name || '从者的住处'}
 
 【创作要求】
-1. 字数：1500-4000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. ${char.name}用第三人称或名字称呼
 4. 描写进入住所、${char.name}的招待、两人的互动
@@ -4441,9 +4441,9 @@ const response = await callChatAPI(prompt, chatContext);
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 5000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 5000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
 
             GS.currentEventStory = story;
@@ -4713,7 +4713,7 @@ ${items.length > 0 ? `- 携带道具：${items.map(i => i.name).join('、')}` : 
 ${chars.map(c => `  ${c.name}：${c.prompt}`).join('\n')}
 
 【创作要求】
-1. 字数：2000-5000字
+1. 字数：2000-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. 所有从者用第三人称或名字称呼，禁止称为"你"
 4. 细腻的感官描写，生动的对话
@@ -5083,7 +5083,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 - ${char.name}的性格：${char.prompt}
 
 【创作要求】
-1. 字数：1500-3000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. ${char.name}用第三人称称呼
 4. 描写${char.name}收到礼物的反应
@@ -5109,9 +5109,9 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 4000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 4000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
 
             GS.currentEventStory = story;
@@ -5171,7 +5171,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 【要求】
 药效发作后...
 
-1. 字数：2000-4000字
+1. 字数：2000-10000字
 2. 第二人称视角，"你"指代${GS.playerName}（女性）
 3. ${char.name}用第三人称称呼
 4. 直白粗俗的R18描写
@@ -5195,9 +5195,9 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 5000, true);
+                }, 10000, true);
             } else {
-                story = await callAPI(prompt, [], 5000, true);
+                story = await callAPI(prompt, [], 10000, true);
             }
 
             GS.currentEventStory = story;
@@ -5311,7 +5311,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 - 住所：${char.home.description || loc?.name || '从者的住处'}
 
 【创作要求】
-1. 字数：1500-4000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. ${char.name}用第三人称或名字称呼
 4. 描写进入住所、${char.name}的招待、两人的互动
@@ -5336,9 +5336,9 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 5000, isR18);
+                }, 10000, isR18);
             } else {
-                story = await callAPI(prompt, [], 5000, isR18);
+                story = await callAPI(prompt, [], 10000, isR18);
             }
 
             GS.currentEventStory = story;
@@ -5526,7 +5526,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 - ${char.name}的性格：${char.prompt}
 
 【创作要求】
-1. 字数：1500-3000字
+1. 字数：1500-10000字
 2. 第二人称视角，"你"永远指代${GS.playerName}（女性）
 3. ${char.name}用第三人称称呼
 4. 描写${char.name}以这个特殊造型出现
@@ -5554,9 +5554,9 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
             if (GS.streamMode) {
                 story = await callAPIStream(prompt, text => {
                     document.getElementById('eventStory').textContent = text;
-                }, 4000, GS.r18Mode);
+                }, 10000, GS.r18Mode);
             } else {
-                story = await callAPI(prompt, [], 4000, GS.r18Mode);
+                story = await callAPI(prompt, [], 10000, GS.r18Mode);
             }
 
             GS.currentEventStory = story;
@@ -5727,7 +5727,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 - 遇到：${randomChar.name}（${randomChar.prompt}）
 
 【创作要求】
-1. 字数：2000-5000字
+1. 字数：2000-10000字
 2. 第二人称视角，"你"指代${GS.playerName}（女性）
 3. ${randomChar.name}用第三人称称呼
 4. 描写这个特异点的独特规则
@@ -5810,7 +5810,7 @@ ${costume ? `8. 描写${costume.name}带来的视觉效果和反应` : ''}
 ${selectedChars.map(c => `  ${c.name}：${c.prompt}`).join('\n')}
 
 【创作要求】
-1. 字数：2000-5000字
+1. 字数：2000-10000字
 2. 第二人称视角，"你"指代${GS.playerName}（女性）
 3. 所有从者用第三人称称呼
 4. 按照设定的世界规则展开剧情
@@ -5989,4 +5989,5 @@ ${selectedChars.map(c => `  ${c.name}：${c.prompt}`).join('\n')}
 
 </body>
 </html>
+
 
