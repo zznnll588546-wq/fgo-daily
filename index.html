@@ -6,7 +6,7 @@
     <title>🍓 救世主的日常生活 - FGO同人游戏 v4.0</title>
 
     <!-- PWA配置 -->
-    <link rel="manifest" href="manifest.json">
+   <link rel="manifest" href="/fgo-daily/manifest.json">
     <meta name="theme-color" content="#e91e63">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -5976,12 +5976,17 @@ ${selectedChars.map(c => `  ${c.name}：${c.prompt}`).join('\n')}
         // 注册 Service Worker（PWA离线支持）
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('✅ PWA已注册'))
-                    .catch(err => console.log('⚠️ PWA注册失败:', err));
+                navigator.serviceWorker.register('/fgo-daily/sw.js', { scope: '/fgo-daily/' })
+                    .then(reg => {
+                        console.log('✅ PWA已注册:', reg.scope);
+                    })
+                    .catch(err => {
+                        console.error('⚠️ PWA注册失败:', err);
+                    });
             });
         }
     </script>
 
 </body>
 </html>
+
